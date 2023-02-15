@@ -1,6 +1,13 @@
 package be.thomasmore.party2023.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Venue {
+
+    @Id
+    private Integer Id;
     private String venueName;
     private String linkMoreInfo;
 
@@ -15,6 +22,18 @@ public class Venue {
     public Venue(String venueName, String linkMoreInfo) {
         this.venueName = venueName;
         this.linkMoreInfo = linkMoreInfo;
+    }
+
+    public Venue() {
+
+    }
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        Id = id;
     }
 
     public String getVenueName() {
