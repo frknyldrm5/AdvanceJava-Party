@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>AboutPage</title>
-    <link rel="stylesheet"  href="party.css">
-</head>
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{party.css}" href="party.css" /></head>
 <body>
 <h1>About me </h1>
 <p>This all about me...</p>
@@ -15,7 +15,7 @@
     <li th:text="${city}">city</li>
 </ol>
 
-<p th:text=" 'Ik ben ' + ${name} + ' en Ik woon ' + ${street} + ' te ' + ${city}  "   ></p>
+<p th:text=" 'Ik ben ' + ${name} + ' en Ik woon ' + ${street} + ' te ' + ${city}  "></p>
 
 </body>
 </html>
