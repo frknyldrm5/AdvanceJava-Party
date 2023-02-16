@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>AboutPage</title>
     <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{party.css}" href="party.css" /></head>
+          th:href="@{party.css}" href="party.css" />
+</head>
 <body>
 
 <nav class="nav">
 
-    <h1 >Let's Party!</h1>
+    <h1>Let's Party!</h1>
     <a class="buttonLook" th:href="@{/home}">home</a>
     <a class="buttonLook" th:href="@{/venuedetails}">venuedetails</a>
     <a class="buttonLook" th:href="@{/about}">about</a>
@@ -29,6 +30,8 @@
 </ol>
 
 <p th:text=" 'Ik ben ' + ${name} + ' en Ik woon ' + ${street} + ' te ' + ${city}  "></p>
+<p th:text="|Mijn naam is ${name} Ik woon in ${street} in ${city}|"></p>
+
 
 </body>
 </html>
