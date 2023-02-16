@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<nav class="nav">
+
+    <h1 >Let's Party!</h1>
+    <a class="buttonLook" th:href="@{/home}">home</a>
+    <a class="buttonLook" th:href="@{/venuedetails}">venuedetails</a>
+    <a class="buttonLook" th:href="@{/about}">about</a>
+
+</nav>
+
+<div class="freespaceforheader"></div>
+
 <p th:text="|De datum van vandaag is ${formatDateTime}|"></p>
 <p th:text="|De uiterste datum van betaling is ${formatDateTimeAfter}|"></p>
 

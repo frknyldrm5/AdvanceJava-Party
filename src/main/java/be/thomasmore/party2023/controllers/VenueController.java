@@ -24,6 +24,7 @@ public class VenueController {
       //        venue.setFreeParkingAvailable(false);
       //        venue.setDistanceFromPublicTransportInKm(1.0);
        //        venue.setCity("Antwerpen");
+
         Optional<Venue> optionalVenue = venueRepository.findById(1);
         if (optionalVenue.isPresent()) {
             model.addAttribute("venue", optionalVenue.get());
