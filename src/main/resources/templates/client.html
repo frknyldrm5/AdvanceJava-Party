@@ -1,16 +1,12 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
-    <title>HomePage</title>
+    <title>Client</title>
     <link rel="stylesheet" type="text/css" media="all"
           th:href="@{party.css}" href="party.css" />
-
 </head>
-
 <body>
-
 <nav class="nav">
 
     <h1 >Let's Party!</h1>
@@ -19,14 +15,11 @@
     <a class="buttonLook" th:href="@{/about}">about</a>
     <a class="buttonLook" th:href="@{/client}">client</a>
 
-</nav>
 
+</nav>
 <div class="freespaceforheader"></div>
 
-<h1>Homepage.. </h1>
-<p th:text="${myCalculatedValue*5}">onbekend nummer</p>
-
-
+<p th:text="|${dateTime}, ${client.getGender()} ${client.getName()}. Uw secret code is  ${client.generateCode()}|"></p>
 
 </body>
 </html>
