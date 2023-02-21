@@ -1,32 +1,29 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
-    <title>HomePage</title>
-    <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{party.css}" href="party.css" />
-
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/party.css}"/>
+    <title>Homepagina</title>
 </head>
-
 <body>
-
-<nav class="nav">
-
-    <h1 >Let's Party!</h1>
-    <a class="buttonLook" th:href="@{/home}">home</a>
-    <a class="buttonLook" th:href="@{/venuedetails}">venuedetails</a>
-    <a class="buttonLook" th:href="@{/about}">about</a>
-    <a class="buttonLook" th:href="@{/client}">client</a>
-
-</nav>
-
+<div class="nav">
+    <h1>Let's Party!</h1>
+    <div class="navbuttons">
+        <a class="buttonLook menuButton" href="/home">home</a>
+        <a class="buttonLook menuButton" href="/venuelist">venuelist</a>
+        <a class="buttonLook menuButton" href="/about">about</a>
+    </div>
+</div>
 <div class="freespaceforheader"></div>
+<div class="row1">
+    <div class="row1content">
+        <div>
+            <h1>Homepagina</h1>
+            <p th:text="${myCalculatedValue}">onbekend nummer</p>
 
-<h1>Homepage.. </h1>
-<p th:text="${myCalculatedValue*5}">onbekend nummer</p>
 
-
-
+        </div>
+    </div>
+</div>
 </body>
 </html>

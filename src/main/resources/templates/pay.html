@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Pay</title>
-    <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{party.css}" href="party.css" />
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/party.css}"/>
+    <title>Pay pagina</title>
 </head>
 <body>
-
-<nav class="nav">
-
-    <h1 >Let's Party!</h1>
-    <a class="buttonLook" th:href="@{/home}">home</a>
-    <a class="buttonLook" th:href="@{/venuedetails}">venuedetails</a>
-    <a class="buttonLook" th:href="@{/about}">about</a>
-    <a class="buttonLook" th:href="@{/client}">client</a>
-
-</nav>
-
-<div class="freespaceforheader"></div>
-
-<p th:text="|De datum van vandaag is ${formatDateTime}|"></p>
-<p th:text="|De uiterste datum van betaling is ${formatDateTimeAfter}|"></p>
-
+<p th:if="${weekend}">Prettig weekend! Je hebt het verdiend!</p>
+<p th:unless="${weekend}">Voor je het weet is het weekend!</p>
+<p th:text="|De datum van vandaag is ${now}|"></p>
+<p th:text="|De uiterste datum van betalen is ${paydate}|"></p>
 </body>
 </html>
