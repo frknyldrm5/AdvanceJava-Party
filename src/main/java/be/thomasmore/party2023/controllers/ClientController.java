@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
-public abstract class ClientController {
+public class ClientController {
     @Autowired
     private ClientRepository clientRepository;
 
-    @GetMapping("/client")
-    public String client(Model model) {
+    @GetMapping("/greetings")
+    public String greetingNewClient(Model model) {
 
         Optional<Client> optionalClient = clientRepository.findById(1);
 
@@ -31,7 +31,7 @@ public abstract class ClientController {
         if (date.getHour() < 12) {
             dateTime = "Goedemorgen";
         } else if (date.getHour() >= 12 && date.getHour() < 17) {
-            dateTime = "goedemiddag";
+            dateTime = "Goedemiddag";
         } else {
             dateTime = "Goedenavond";
         }

@@ -20,7 +20,7 @@ public class Client {
     public Client(String name, String birthdate, String gender, String startdate) {
         this.clientName = name;
         this.birthDate = birthdate;
-        this.gender = gender;
+        this.setGender(gender);
         this.startDate = startdate;
     }
 
@@ -53,17 +53,15 @@ public class Client {
     }
 
     public String getGender() {
-        if (gender == "M"){
-            return "Meneer";
-        }
-        else {
-            return "Mevrouw";
-        }
-
+        return gender;
     }
 
     public void setGender(String gender) {
+        this.gender = "U";
+
+        if (gender.equals("M") || gender.equals("F")){
         this.gender = gender;
+        }
     }
 
     public String getStartdate() {

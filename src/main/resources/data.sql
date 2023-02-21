@@ -4,6 +4,7 @@ VALUES (1, 'Den Aalmoezenier', 100, 'Antwerpen', 1, true, false, true, false, 'h
 
 
 
-INSERT INTO client (id, birth_date, client_name, gender, start_date)
-
- VALUES (1, '21-07-1998', 'Furkan Yildirim', 'M',  '01-01-2022');
+INSERT INTO "PUBLIC"."CLIENT" VALUES
+                                  (1, '21-07-1998', 'Furkan Yildirim', 'M', '01-01-2022'),
+                                  (2, '31-07-200', 'Salih Tuzcu', 'F', '01-01-2022'),
+                                  (3, '31-08-1999', 'Ahmet Nuri Uygun', 'F', '01-01-2022');
