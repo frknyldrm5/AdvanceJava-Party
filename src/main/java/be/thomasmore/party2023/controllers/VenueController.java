@@ -53,12 +53,12 @@ public class VenueController {
         return "venuelist";
         }
 
-        @GetMapping("venuelist/outdoor/yes")
-        public String venueListOutdoorYes(Model model){
-        Iterable<Venue> venues = venueRepository.findByOutdoor(true);
-        model.addAttribute("venues", venues);
-        return "venuelist";
-        }
+//        @GetMapping("venuelist/outdoor/yes")
+//        public String venueListOutdoorYes(Model model){
+//        Iterable<Venue> venues = venueRepository.findByOutdoor(true);
+//        model.addAttribute("venues", venues);
+//        return "venuelist";
+//        }
 
     @GetMapping("venuelist/outdoor/{outdoor}")
     public String venueListOutdoorYes(Model model,@PathVariable (required = false)String outdoor){

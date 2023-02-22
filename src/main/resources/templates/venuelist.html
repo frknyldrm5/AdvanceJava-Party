@@ -22,9 +22,9 @@
 
       <div>
         <p>outdoor:
-          <a href="/venuelist/outdoor/all"><span class="buttonLook smallButton">all</span></a>
-          <a href="/venuelist/outdoor/yes"><span class="buttonLook smallButton">yes</span></a>
-          <a href="/venuelist/outdoor/no"><span class="buttonLook smallButton">no</span></a>
+          <a href="/venuelist/outdoor/all"><span class="buttonLook smallButton" th:classappend="${filter != null && filter.equals('all') ? 'activeFilter' : ''}">all</span></a>
+          <a href="/venuelist/outdoor/yes"><span class="buttonLook smallButton" th:classappend="${filter != null && filter.equals('all') ? 'activeFilter' : ''}">yes</span></a>
+          <a href="/venuelist/outdoor/no"><span class="buttonLook smallButton" th:classappend="${filter != null && filter.equals('all') ? 'activeFilter' : ''}">no</span></a>
         </p>
       </div>
 
