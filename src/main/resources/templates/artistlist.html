@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Venuelist</title>
+  <title>Artistlist</title>
   <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/party.css}"/>
 </head>
 
@@ -17,22 +17,11 @@
 <div class="row1">
   <div class="row1content">
     <div>
-      <h1>Venues</h1>
-
-
-      <div>
-        <p>outdoor:
-          <a href="/venuelist/outdoor/all"><span class="buttonLook smallButton">all</span></a>
-          <a href="/venuelist/outdoor/yes"><span class="buttonLook smallButton">yes</span></a>
-          <a href="/venuelist/outdoor/no"><span class="buttonLook smallButton">no</span></a>
-        </p>
-      </div>
-
-
-      <div th:each="venue : ${venues}">
-        <a th:href="@{'/venuedetails/' + ${venue.id}}">
+      <h1>Artists</h1>
+      <div th:each="artist : ${artist}">
+        <a th:href="@{'/artistdetails/' + ${artist.id}}">
           <span class="buttonLook mediumButton"
-                th:text="${venue.getVenueName()}">
+                th:text="${artist.getArtistName()}">
             onbekend nummer</span>
         </a>
       </div>

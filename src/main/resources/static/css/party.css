@@ -83,7 +83,7 @@ a {
 }
 
 .smallButton {
-    display: block;
+    display: inline-block;
     font-size: 1em;
     padding: 0.5em;
 }
