@@ -7,17 +7,8 @@
 
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}">Hier komt de header</div>
 
-<nav class="nav">
-
-    <h1>Let's Party!</h1>
-    <a class="buttonLook" th:href="@{/home}">home</a>
-    <a class="buttonLook" th:href="@{/about}">about</a>
-    <a class="buttonLook" th:href="@{/client}">client</a>
-    <a class="buttonLook" th:href="@{/venuelist}">venuelist</a>
-
-
-</nav>
 
 <div class="freespaceforheader"></div>
 
@@ -33,6 +24,9 @@
 
 <p th:text=" 'Ik ben ' + ${name} + ' en Ik woon ' + ${street} + ' te ' + ${city}  "></p>
 <p th:text="|Mijn naam is ${name} Ik woon in ${street} in ${city}|"></p>
+
+<div th:replace="~{fragments/footer :: footer}">Hier komt de footer</div>
+
 
 
 </body>

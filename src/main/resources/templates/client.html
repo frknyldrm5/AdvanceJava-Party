@@ -7,20 +7,14 @@
 
 </head>
 <body>
-<nav class="nav">
+<div th:replace="~{fragments/header :: header}">Hier komt de header</div>
 
-    <h1 >Let's Party!</h1>
-    <a class="buttonLook" th:href="@{/home}">home</a>
-    <a class="buttonLook" th:href="@{/about}">about</a>
-    <a class="buttonLook" th:href="@{/client}">client</a>
-    <a class="buttonLook" th:href="@{/venuelist}">venuelist</a>
-
-
-
-</nav>
 <div class="freespaceforheader"></div>
 
 <p th:text="|${dateTime}, ${client.getGender()} ${client.getName()}. Uw secret code is  ${client.generateCode()}|"></p>
+
+<div th:replace="~{fragments/footer :: footer}">Hier komt de footer</div>
+
 
 </body>
 </html>
