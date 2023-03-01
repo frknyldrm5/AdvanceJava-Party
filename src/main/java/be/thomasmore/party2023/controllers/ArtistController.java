@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -35,4 +36,26 @@ public class ArtistController {
         return "artistdetails";
 
     }
+
+
+    @GetMapping("/artistlist/filter")
+    public String artistWithFilter(Model model ,@PathVariable(required = false)String keyword){
+        List<Artist> artist;
+        if (keyword == null){
+            keyword = keyword.trim();
+        }
+        if (keyword == null || keyword.equals(" ")){
+            artist = artistRepository.findAll();
+        }
+        else {
+            artist =artistRepository.findByArtistNameContainingIgnoreCase(keyword);
+            model.addAttribute("keyword",keyword);
+        }
+        model.addAttribute("artist",artist);
+        model.addAttribute("nrArtist",artist.size());
+        model.addAttribute("ShowFilter",true);
+        return "artistlist";
+    }
+
+
 }

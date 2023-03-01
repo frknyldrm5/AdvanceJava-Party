@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -47,38 +48,74 @@ public class VenueController {
     public String venueList(Model model) {
         Iterable<Venue> allVenues = venueRepository.findAll();
         model.addAttribute("venues", allVenues);
-        model.addAttribute("nrvenues",venueRepository.count());
+        model.addAttribute("nrVenues",venueRepository.count());
 
         return "venuelist";
     }
 
+
+
+//    @GetMapping("/venuelist/filter")
+//    public String venueListWithFilter(Model model, @RequestParam(required = false) Integer minimumCapacity) {
+//
+//        logger.info("venueListWithFilter");
+//        logger.info("minimumCapacity = " + minimumCapacity);
+//        Iterable<Venue> venues;
+//        if (minimumCapacity != null && minimumCapacity > 0){
+//            venues = venueRepository.findByCapacityIsGreaterThan(minimumCapacity);
+//            model.addAttribute("nrvenues",venueRepository.count());
+//        }
+//        else{
+//            venues = venueRepository.findAll();
+//            model.addAttribute("nrvenues",venueRepository.count());
+//
+//        }
+//        model.addAttribute("venues",venues);
+//        model.addAttribute("showFilter", true);
+//        return "venuelist";
+//    }
 
 
     @GetMapping("/venuelist/filter")
-    public String venueListWithFilter(Model model, @RequestParam(required = false) Integer minimumCapacity) {
-
+    public String venueListWithFilter(Model model,
+                                      @RequestParam(required = false) Integer minimumCapacity,
+                                      @RequestParam(required = false) Integer maximumCapacity,
+                                      @RequestParam(required = false) String indoor){
         logger.info("venueListWithFilter");
         logger.info("minimumCapacity = " + minimumCapacity);
-        Iterable<Venue> venues;
-        if (minimumCapacity != null && minimumCapacity > 0){
-            venues = venueRepository.findByCapacityIsGreaterThan(minimumCapacity);
-            model.addAttribute("nrvenues",venueRepository.count());
+
+        Boolean indoorParam = null;
+        if (indoor != null){
+            if (indoor.equals("yes")) indoorParam = true;
+            if (indoor.equals("no")) indoorParam = false;
         }
-        else{
-            venues = venueRepository.findAll();
-            model.addAttribute("nrvenues",venueRepository.count());
-
-        }
-        model.addAttribute("venues",venues);
-        model.addAttribute("showFilter", true);
-        return "venuelist";
-    }
+        List<Venue> venues = venueRepository.findComplicatedQuery()
 
 
+//        List<Venue> venues;
+//        if (minimumCapacity!=null && minimumCapacity > 0 && maximumCapacity!=null && maximumCapacity > 0) {
+//            venues = venueRepository.findByCapacityIsBetween(minimumCapacity, maximumCapacity);
+//            model.addAttribute("minCapacity", minimumCapacity);
+//            model.addAttribute("maxCapacity", maximumCapacity);
+//        } else if(minimumCapacity!=null && minimumCapacity > 0 && maximumCapacity==null) {
+//            venues = venueRepository.findByCapacityIsGreaterThanEqual(minimumCapacity);
+//            model.addAttribute("minCapacity", minimumCapacity);
+//        } else if(minimumCapacity==null && maximumCapacity!=null && maximumCapacity > 0) {
+//            venues = venueRepository.findByCapacityIsLessThan(maximumCapacity);
+//            model.addAttribute("maxCapacity", maximumCapacity);
+//        } else {
+//            venues = venueRepository.findAll();
+//        }
+//        model.addAttribute("venues", venues);
+//        model.addAttribute("nrVenues", venues.size());
+//        model.addAttribute("showFilter", true);
+//        return "venuelist";
+//    }
 
 
 
-    }
+
+}
 
 
 
