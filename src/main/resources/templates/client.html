@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>AboutPage</title>
+    <title>Client</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/party.css}"/>
 
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">Hier komt de header</div>
 
-
 <div class="freespaceforheader"></div>
 
-
-<h1>About me </h1>
+<p th:text="|${dateTime}, ${client.getGender()} ${client.getName()}. Uw secret code is  ${client.generateCode()}|"></p>
 
 <div th:replace="~{fragments/footer :: footer}">Hier komt de footer</div>
-
 
 
 </body>

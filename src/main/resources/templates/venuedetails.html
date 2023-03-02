@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/party.css}"/>
+    <title>Venuedetails pagina</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">Hier komt de header</div>
+
+
+
+<div class="freespaceforheader"></div>
+
+
+<div class="row1">
+
+    <div class="row1content" th:unless="${venue}">
+        <p>geen geldige venue gekozen</p>
+    </div>
+
+    <div class="row1content" th:if="${venue}">
+
+        <div th:if="${prev!=null}" class="prevButtonDiv">
+            <a class="buttonLook smallButton" th:href="@{'/venuedetails/' + ${prev}}">&lt;</a>
+        </div>
+        <div th:if="${next!=null}" class="nextButtonDiv">
+            <a class="buttonLook smallButton" th:href="@{'/venuedetails/' + ${next}}">&gt;</a>
+        </div>
+
+
+
+        <div>
+            <h2 th:text="${venue.getVenueName()}">Naam venue</h2>
+        </div>
+        <div>
+            <div class="info">Info : </div>
+            <div><a th:href="@{${venue.getLinkMoreInfo()}}" th:text="${venue.getLinkMoreInfo()}">klik hier</a></div><br>
+            <div class="info">Capacity : </div>
+            <div><p th:text="${venue.getCapacity()}">0</p></div><br>
+            <div class="info">Food provided? : </div>
+            <div><p th:text="${venue.isFoodProvided() ? 'yes' : 'no'}">no</p></div><br>
+            <div class="info">Indoor? : </div>
+            <div><p th:text="${venue.isIndoor() ? 'yes' : 'no'}">no</p></div><br>
+            <div class="info">Outdoor? : </div>
+            <div><p th:text="${venue.isOutdoor() ? 'yes' : 'no'}">no</p></div><br>
+            <div class="info">Free Parking Available? : </div>
+            <div><p th:text="${venue.isFreeParkingAvailable() ? 'yes' : 'no'}">no</p></div><br>
+            <div class="info">Distance Public Transport in km : </div>
+            <div><p th:text="${venue.distanceFromPublicTransportInKm}">0</p></div><br>
+            <div class="info">City : </div>
+            <div><p th:text="${venue.getCity()}">?/p></div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="~{fragments/footer :: footer}">Hier komt de footer</div>
+
+</body>
+</html>
