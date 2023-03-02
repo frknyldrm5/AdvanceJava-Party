@@ -89,7 +89,7 @@ public class VenueController {
             if (indoor.equals("yes")) indoorParam = true;
             if (indoor.equals("no")) indoorParam = false;
         }
-        List<Venue> venues = venueRepository.findComplicatedQuery()
+        List<Venue> venues = venueRepository.findComplicatedQuery();
 
 
 //        List<Venue> venues;
@@ -115,7 +115,7 @@ public class VenueController {
 
 
 
-}
+}}
 
 
 
