@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,45 +19,54 @@ public class ArtistController {
     private ArtistRepository artistRepository;
 
     @GetMapping("/artistlist")
-    public String venueDetails(Model model){
-        Iterable<Artist> allArtist = artistRepository.findAll();
-        model.addAttribute("artist",allArtist);
+    public String artistList(Model model) {
+        List<Artist> artists = artistRepository.findAll();
+        model.addAttribute("artists", artists);
+        model.addAttribute("nrArtists", artists.size());
         return "artistlist";
     }
 
-    @GetMapping({"/artistdetails/{id}","/artistdetails"})
-    public String artistDetails(Model model, @PathVariable(required = false) Integer id) {
-        if (id == null){
-            return "artistdetails";
-        }
+    @GetMapping("/artistlist/filter")
+    public String artistListWithFilter(Model model,
+                                       @RequestParam(required = false) String keyword) {
+//        List<Artist> artists;
 
+        Iterable<Artist> artists;
+        artists = artistRepository.findByKeyword(keyword); //added
+
+//        if (keyword!=null) keyword = keyword.trim();
+//        if (keyword==null || keyword.equals("")) {
+//            artists = artistRepository.findAll();
+//        } else {
+//            artists = artistRepository.findArtistsContainingKeyword(keyword);
+//            model.addAttribute("keyword", keyword);
+//        }
+        model.addAttribute("artists", artists);
+        model.addAttribute("nrArtists", ((Collection<Artist>) artists).size());
+        model.addAttribute("showFilter", true);
+        return "artistlist";
+    }
+
+    @GetMapping({"/artistdetails", "/artistdetails/{id}"})
+    public String artistDetails(Model model, @PathVariable(required = false) Integer id) {
+        if (id==null) return "artistdetails";
         Optional<Artist> optionalArtist = artistRepository.findById(id);
+        Optional<Artist> optionalPrev = artistRepository.findFirstByIdLessThanOrderByIdDesc(id);
+        Optional<Artist> optionalNext = artistRepository.findFirstByIdGreaterThanOrderById(id);
         if (optionalArtist.isPresent()) {
             model.addAttribute("artist", optionalArtist.get());
         }
+        if (optionalPrev.isPresent()) {
+            model.addAttribute("prev", optionalPrev.get().getId());
+        } else {
+            model.addAttribute("prev", artistRepository.findFirstByOrderByIdDesc().get().getId());
+        }
+        if (optionalNext.isPresent()) {
+            model.addAttribute("next", optionalNext.get().getId());
+        } else {
+            model.addAttribute("next", artistRepository.findFirstByOrderByIdAsc().get().getId());
+        }
         return "artistdetails";
-
     }
-
-
-    @GetMapping("/artistlist/filter")
-    public String artistWithFilter(Model model ,@PathVariable(required = false)String keyword){
-        List<Artist> artist;
-        if (keyword == null){
-            keyword = keyword.trim();
-        }
-        if (keyword == null || keyword.equals(" ")){
-            artist = artistRepository.findAll();
-        }
-        else {
-            artist =artistRepository.findByArtistNameContainingIgnoreCase(keyword);
-            model.addAttribute("keyword",keyword);
-        }
-        model.addAttribute("artist",artist);
-        model.addAttribute("nrArtist",artist.size());
-        model.addAttribute("ShowFilter",true);
-        return "artistlist";
-    }
-
 
 }

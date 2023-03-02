@@ -14,17 +14,48 @@
 
 <div class="freespaceforheader"></div>
 
+<div class="freespaceforheader"></div>
 <div class="row1">
   <div class="row1content">
     <div>
       <h1>Artists</h1>
-      <div th:each="artist : ${artist}">
-        <a th:href="@{'/artistdetails/' + ${artist.id}}">
+      <div class="verticalmargin">
+        <span class="generalinfo" th:text="|${nrArtist} artist found|">0 artist found</span>
+      </div>
+      <div class="filters" th:if="${showFilter}">
+        <div class="verticalmargin">
+          <a th:href="@{/artistlist}" class="buttonLook filterButton">-</a>
+          <p>hier komen de filters</p>
+        </div>
+
+        <form>
+          <div class="onefilter">
+            <input type="submit" value="search" class="buttonLook">
+          </div>
+
+          <div class="onefilter">
+            <label for="keyword" class="filtername"></label>
+            <input type="text" id="keyword" name="keyword"> <span></span>
+          </div>
+        </form>
+      </div>
+      <div class="filters" th:unless="${showFilter}">
+        <div class="verticalmargin">
+          <a th:href="@{/artistlist/filter}" class="buttonLook filterButton">+</a>
+        </div>
+      </div>
+
+
+      <div class="collectionlist artistlist">
+        <div th:each="artist : ${artists}">
+          <a th:href="@{'/artistdetails/' + ${artist.id}}">
           <span class="buttonLook mediumButton"
                 th:text="${artist.getArtistName()}">
             onbekend nummer</span>
-        </a>
+          </a>
+        </div>
       </div>
+
     </div>
   </div>
 </div>

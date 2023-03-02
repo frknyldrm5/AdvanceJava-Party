@@ -21,7 +21,7 @@ public class VenueController {
     private VenueRepository venueRepository;
     private Logger logger = LoggerFactory.getLogger(VenueController.class);
 
-    @GetMapping({"/venuedetails/{id}","/venuedetails"})
+    @GetMapping({"/venuedetails/{id}", "/venuedetails"})
     public String venueDetails(Model model, @PathVariable(required = false) Integer id) {
         if (id==null) return "venuedetails";
         Optional<Venue> optionalVenue = venueRepository.findById(id);
@@ -41,82 +41,51 @@ public class VenueController {
             model.addAttribute("next", venueRepository.findFirstByOrderByIdAsc().get().getId());
         }
         return "venuedetails";
-
     }
 
     @GetMapping({"/venuelist", "/venuelist/{something}"})
     public String venueList(Model model) {
-        Iterable<Venue> allVenues = venueRepository.findAll();
+        List<Venue> allVenues = venueRepository.findAllVenues();
         model.addAttribute("venues", allVenues);
-        model.addAttribute("nrVenues",venueRepository.count());
-
+        model.addAttribute("nrVenues", allVenues.size());
         return "venuelist";
     }
-
-
-
-//    @GetMapping("/venuelist/filter")
-//    public String venueListWithFilter(Model model, @RequestParam(required = false) Integer minimumCapacity) {
-//
-//        logger.info("venueListWithFilter");
-//        logger.info("minimumCapacity = " + minimumCapacity);
-//        Iterable<Venue> venues;
-//        if (minimumCapacity != null && minimumCapacity > 0){
-//            venues = venueRepository.findByCapacityIsGreaterThan(minimumCapacity);
-//            model.addAttribute("nrvenues",venueRepository.count());
-//        }
-//        else{
-//            venues = venueRepository.findAll();
-//            model.addAttribute("nrvenues",venueRepository.count());
-//
-//        }
-//        model.addAttribute("venues",venues);
-//        model.addAttribute("showFilter", true);
-//        return "venuelist";
-//    }
-
 
     @GetMapping("/venuelist/filter")
     public String venueListWithFilter(Model model,
                                       @RequestParam(required = false) Integer minimumCapacity,
                                       @RequestParam(required = false) Integer maximumCapacity,
-                                      @RequestParam(required = false) String indoor){
+                                      @RequestParam(required = false) Boolean test,
+                                      @RequestParam(required = false) Boolean indoor) {
         logger.info("venueListWithFilter");
         logger.info("minimumCapacity = " + minimumCapacity);
 
-        Boolean indoorParam = null;
-        if (indoor != null){
-            if (indoor.equals("yes")) indoorParam = true;
-            if (indoor.equals("no")) indoorParam = false;
-        }
-        List<Venue> venues = venueRepository.findComplicatedQuery();
+
+//        Iterable<Venue> venues;
+//        venues = venueRepository.findByCapacity(minimumCapacity, maximumCapacity);
 
 
-//        List<Venue> venues;
-//        if (minimumCapacity!=null && minimumCapacity > 0 && maximumCapacity!=null && maximumCapacity > 0) {
-//            venues = venueRepository.findByCapacityIsBetween(minimumCapacity, maximumCapacity);
-//            model.addAttribute("minCapacity", minimumCapacity);
-//            model.addAttribute("maxCapacity", maximumCapacity);
-//        } else if(minimumCapacity!=null && minimumCapacity > 0 && maximumCapacity==null) {
-//            venues = venueRepository.findByCapacityIsGreaterThanEqual(minimumCapacity);
-//            model.addAttribute("minCapacity", minimumCapacity);
-//        } else if(minimumCapacity==null && maximumCapacity!=null && maximumCapacity > 0) {
-//            venues = venueRepository.findByCapacityIsLessThan(maximumCapacity);
-//            model.addAttribute("maxCapacity", maximumCapacity);
-//        } else {
+        //        if (minimumCapacity != null && maximumCapacity == null){
+//            venues = venueRepository.findByBigCapacity(minimumCapacity);
+//        }else if(maximumCapacity != null && minimumCapacity== null && maximumCapacity>0){
+//            venues = venueRepository.findByCapacityIsLessThanEqual(maximumCapacity);
+//        }else if(minimumCapacity == null && maximumCapacity == null){
 //            venues = venueRepository.findAll();
+//        }else{
+//            venues = venueRepository.findByCapacityIsBetween(minimumCapacity,maximumCapacity);
 //        }
-//        model.addAttribute("venues", venues);
-//        model.addAttribute("nrVenues", venues.size());
-//        model.addAttribute("showFilter", true);
-//        return "venuelist";
-//    }
 
-
-
-
-}}
-
+        List<Venue> venues = venueRepository.findComplicatedQuery(
+                minimumCapacity, maximumCapacity, indoor);
+        model.addAttribute("minCapacity", minimumCapacity);
+        model.addAttribute("maxCapacity", maximumCapacity);
+        model.addAttribute("indoor", indoor);
+        model.addAttribute("venues", venues);
+        model.addAttribute("nrVenues", venues.size());
+        model.addAttribute("showFilter", true);
+        return "venuelist";
+    }
+}
 
 
 
